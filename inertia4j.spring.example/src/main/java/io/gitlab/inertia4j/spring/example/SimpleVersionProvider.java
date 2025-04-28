@@ -1,6 +1,6 @@
 package io.gitlab.inertia4j.spring.example;
 
-import io.gitlab.inertia4j.spring.VersionProvider;
+import io.github.inertia4j.spring.VersionProvider;
 import org.springframework.stereotype.Component;
 
 @Component
