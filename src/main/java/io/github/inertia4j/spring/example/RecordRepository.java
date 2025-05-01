@@ -1,4 +1,4 @@
-package io.gitlab.inertia4j.spring.example;
+package io.github.inertia4j.spring.example;
 
 import org.springframework.stereotype.Component;
 

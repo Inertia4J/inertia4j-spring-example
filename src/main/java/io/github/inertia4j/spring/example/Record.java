@@ -1,4 +1,4 @@
-package io.gitlab.inertia4j.spring.example;
+package io.github.inertia4j.spring.example;
 
 public class Record implements Comparable<Record> {
     private final int id;

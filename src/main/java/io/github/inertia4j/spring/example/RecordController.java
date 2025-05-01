@@ -1,4 +1,4 @@
-package io.gitlab.inertia4j.spring.example;
+package io.github.inertia4j.spring.example;
 
 import io.github.inertia4j.spring.Inertia;
 import io.github.inertia4j.spring.Inertia.Options;
