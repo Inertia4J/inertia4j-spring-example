@@ -2,7 +2,7 @@ package io.gitlab.inertia4j.spring.example;
 
 import io.github.inertia4j.spring.Inertia;
 import io.github.inertia4j.spring.Inertia.Options;
-import io.github.inertia4j.spring.InertiaSpring;
+import io.github.inertia4j.spring.Inertia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Set;
 public class RecordController {
 
     @Autowired
-    private InertiaSpring inertia;
+    private Inertia inertia;
 
     @Autowired
     private RecordRepository recordRepository;
@@ -28,7 +28,7 @@ public class RecordController {
 
     @GetMapping("/records")
     public ResponseEntity<String> records() {
-        return Inertia.redirect("/");
+        return inertia.redirect("/");
     }
 
     @GetMapping("/records/first")
@@ -40,7 +40,7 @@ public class RecordController {
 
     @PostMapping("/records")
     public ResponseEntity<String> create(@RequestBody Record record) {
-        return Inertia.redirect("/records/first");
+        return inertia.redirect("/records/first");
     }
 
     @GetMapping("/encryptHistory")

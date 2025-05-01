@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.gitlab.inertia4j:inertia4j-spring") // Review dependency once package is published.
+    implementation("io.github.inertia4j:inertia4j-spring") // Review dependency once package is published.
 
     implementation("org.springframework.boot:spring-boot-starter-web")
 
