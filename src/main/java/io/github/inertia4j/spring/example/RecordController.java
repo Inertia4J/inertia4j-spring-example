@@ -2,7 +2,6 @@ package io.github.inertia4j.spring.example;
 
 import io.github.inertia4j.spring.Inertia;
 import io.github.inertia4j.spring.Inertia.Options;
-import io.github.inertia4j.spring.Inertia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
