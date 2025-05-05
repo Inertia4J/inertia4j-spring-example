@@ -48,6 +48,13 @@ public class RecordController {
         return inertia.render("records/Show", Map.of("record", record));
     }
 
+    @DeleteMapping("/records/{id}")
+    public ResponseEntity<String> deleteRecord(@PathVariable int id) {
+        recordRepository.deleteById(id);
+
+        return inertia.redirect("/records");
+    }
+
     // TODO: Add external usage example
     @GetMapping("/externalRedirect")
     public ResponseEntity<String> externalRedirect() {
