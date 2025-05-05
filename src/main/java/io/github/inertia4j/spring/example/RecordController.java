@@ -30,39 +30,24 @@ public class RecordController {
         return inertia.redirect("/");
     }
 
-    @GetMapping("/records/first")
-    public ResponseEntity<String> first() {
-        Record record = recordRepository.getRecordById(1);
-
-        return inertia.render("records/Show", Map.of("record", record));
+    @GetMapping("/records/new")
+    public ResponseEntity<String> newRecord() {
+        return inertia.render("records/New", null);
     }
 
     @PostMapping("/records")
     public ResponseEntity<String> create(@RequestBody Record record) {
-        return inertia.redirect("/records/first");
+        return inertia.redirect("/records");
     }
 
-    @GetMapping("/encryptHistory")
-    public ResponseEntity<String> indexEncryptHistory() {
-        Set<Record> records = recordRepository.getAllRecords();
+    @GetMapping("/records/{id}")
+    public ResponseEntity<String> show(@PathVariable int id) {
+        Record record = recordRepository.getRecordById(id);
 
-        return inertia.render("records/Index", Map.of("records", records), Options.encryptHistory());
+        return inertia.render("records/Show", Map.of("record", record));
     }
 
-    @GetMapping("/clearHistory")
-    public ResponseEntity<String> indexClearHistory() {
-        Set<Record> records = recordRepository.getAllRecords();
-
-        return inertia.render("records/Index", Map.of("records", records), Options.clearHistory());
-    }
-
-    @GetMapping("/allOptions")
-    public ResponseEntity<String> allOptions() {
-        Set<Record> records = recordRepository.getAllRecords();
-
-        return inertia.render("records/Index", Map.of("records", records), Options.clearHistory().encryptHistory());
-    }
-
+    // TODO: Add external usage example
     @GetMapping("/externalRedirect")
     public ResponseEntity<String> externalRedirect() {
         return inertia.location("https://inertiajs.com/");
