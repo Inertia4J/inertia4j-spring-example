@@ -1,24 +1,30 @@
 package io.github.inertia4j.spring.example;
 
-public class Record implements Comparable<Record> {
-    private final int id;
-    private final String name;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    public Record(int id, String name) {
-        this.id = id;
+@Entity
+public class Record {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String name;
+
+    public Record() {}
+
+    public Record(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public int compareTo(Record that) {
-        return Integer.compare(this.id, that.id);
     }
 }

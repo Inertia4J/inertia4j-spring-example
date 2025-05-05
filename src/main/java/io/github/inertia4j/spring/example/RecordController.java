@@ -1,13 +1,12 @@
 package io.github.inertia4j.spring.example;
 
 import io.github.inertia4j.spring.Inertia;
-import io.github.inertia4j.spring.Inertia.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 public class RecordController {
@@ -20,7 +19,7 @@ public class RecordController {
 
     @GetMapping("/")
     public ResponseEntity<String> index() {
-        Set<Record> records = recordRepository.getAllRecords();
+        List<Record> records = recordRepository.findAll();
 
         return inertia.render("records/Index", Map.of("records", records));
     }
@@ -37,12 +36,14 @@ public class RecordController {
 
     @PostMapping("/records")
     public ResponseEntity<String> create(@RequestBody Record record) {
+        recordRepository.save(record);
+
         return inertia.redirect("/records");
     }
 
     @GetMapping("/records/{id}")
     public ResponseEntity<String> show(@PathVariable int id) {
-        Record record = recordRepository.getRecordById(id);
+        Record record = recordRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));;
 
         return inertia.render("records/Show", Map.of("record", record));
     }

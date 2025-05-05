@@ -1,22 +1,7 @@
 package io.github.inertia4j.spring.example;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-@Component
-public class RecordRepository {
-    public Set<Record> getAllRecords() {
-        SortedSet<Record> records = new TreeSet<>();
-        records.add(new Record(1, "John Doe"));
-        records.add(new Record(2, "Jane Smith"));
-        records.add(new Record(3, "Alice Johnson"));
-        return records;
-    }
-
-    public Record getRecordById(int id) {
-        return new Record(id, "Mock Name " + id);
-    }
-}
+@Repository
+public interface RecordRepository extends JpaRepository<Record, Integer> {}
