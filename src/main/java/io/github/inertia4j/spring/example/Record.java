@@ -20,6 +20,11 @@ public class Record {
         this.name = name;
     }
 
+    public Record(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
