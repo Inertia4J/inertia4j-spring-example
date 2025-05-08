@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -34,7 +35,7 @@ class Inertia4jSpringApplicationTests {
 	void setup() {
 		Mockito.when(recordRepository.findAll()).thenReturn(mockRecords);
 	}
-	
+
 	@Test
 	void indexPageHtmlRendering() throws Exception {
 		String expectedHtml = """
@@ -54,8 +55,16 @@ class Inertia4jSpringApplicationTests {
 """;
 
 		mvc.perform(get("/"))
-				.andExpect(status().isOk())
-				.andExpect(content().string(expectedHtml));
+			.andExpect(status().isOk())
+			.andExpect(result -> {
+				String actual = result.getResponse().getContentAsString()
+					.replaceAll("\\r\\n", "\n")
+					.trim();
+				String expected = expectedHtml
+					.replaceAll("\\r\\n", "\n")
+					.trim();
+				assertEquals(expected, actual);
+			});
 	}
 
 	@Test
