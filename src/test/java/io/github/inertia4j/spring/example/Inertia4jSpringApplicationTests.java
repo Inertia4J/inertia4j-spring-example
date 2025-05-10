@@ -26,9 +26,9 @@ class Inertia4jSpringApplicationTests {
 	private RecordRepository recordRepository;
 
 	private final List<Record> mockRecords = List.of(
-			new Record(1, "John Doe"),
-			new Record(2, "Jane Smith"),
-			new Record(3, "Alice Johnson")
+			new Record(1, "Deadwing", "Porcupine Tree", null, 2005),
+			new Record(2, "White Album", "The Beatles", null, 1968),
+			new Record(3, "Sailing the Seas of Cheese", "Primus", null, 1991)
 	);
 
 	@BeforeEach
@@ -48,34 +48,70 @@ class Inertia4jSpringApplicationTests {
     <title>App</title>
   </head>
   <body>
-    <div id="app" data-page='{"component":"records/Index","props":{"records":[{"id":1,"name":"John Doe"},{"id":2,"name":"Jane Smith"},{"id":3,"name":"Alice Johnson"}]},"url":"/","version":"latest","encryptHistory":false,"clearHistory":false}'></div>
+    <div id="app" data-page='{"component":"records/Index","props":{"records":[{"id":1,"name":"Deadwing","artist":"Porcupine Tree","coverImage":null,"yearOfRelease":2005},{"id":2,"name":"White Album","artist":"The Beatles","coverImage":null,"yearOfRelease":1968},{"id":3,"name":"Sailing the Seas of Cheese","artist":"Primus","coverImage":null,"yearOfRelease":1991}]},"url":"/","version":"latest","encryptHistory":false,"clearHistory":false}'></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
 """;
 
 		mvc.perform(get("/"))
-			.andExpect(status().isOk())
-			.andExpect(result -> {
-				String actual = result.getResponse().getContentAsString()
-					.replaceAll("\\r\\n", "\n")
-					.trim();
-				String expected = expectedHtml
-					.replaceAll("\\r\\n", "\n")
-					.trim();
-				assertEquals(expected, actual);
-			});
+				.andExpect(status().isOk())
+				.andExpect(result -> {
+					String actual = result.getResponse().getContentAsString()
+							.replaceAll("\\r\\n", "\n")
+							.trim();
+					String expected = expectedHtml
+							.replaceAll("\\r\\n", "\n")
+							.trim();
+					assertEquals(expected, actual);
+				});
 	}
 
 	@Test
 	void indexPageJsonRendering() throws Exception {
 		String expectedJson = """
-{"component":"records/Index","props":{"records":[{"id":1,"name":"John Doe"},{"id":2,"name":"Jane Smith"},{"id":3,"name":"Alice Johnson"}]},"url":"/","version":"latest","encryptHistory":false,"clearHistory":false}
-		""".stripTrailing();
+{
+  "component": "records/Index",
+  "props": {
+    "records": [
+      {
+        "id": 1,
+        "name": "Deadwing",
+        "artist": "Porcupine Tree",
+        "coverImage": null,
+        "yearOfRelease": 2005
+      },
+      {
+        "id": 2,
+        "name": "White Album",
+        "artist": "The Beatles",
+        "coverImage": null,
+        "yearOfRelease": 1968
+      },
+      {
+        "id": 3,
+        "name": "Sailing the Seas of Cheese",
+        "artist": "Primus",
+        "coverImage": null,
+        "yearOfRelease": 1991
+      }
+    ]
+  },
+  "url": "/",
+  "version": "latest",
+  "encryptHistory": false,
+  "clearHistory": false
+}
+""".strip().replaceAll("\n", "").replaceAll(" +", "");
 
 		mvc.perform(get("/").header("X-Inertia", "true"))
 				.andExpect(status().isOk())
-				.andExpect(content().string(expectedJson));
+				.andExpect(result -> {
+					String actualJson = result.getResponse().getContentAsString()
+							.replaceAll("\n", "")
+							.replaceAll(" +", "");
+					assertEquals(expectedJson, actualJson);
+				});
 	}
 
 	@Test

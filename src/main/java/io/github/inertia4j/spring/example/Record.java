@@ -13,16 +13,25 @@ public class Record {
     private Integer id;
 
     private String name;
+    private String artist;
+    private String coverImage; // URL
+    private Integer yearOfRelease;
 
     public Record() {}
 
-    public Record(String name) {
+    public Record(String name, String artist, String coverImage, Integer yearOfRelease) {
         this.name = name;
+        this.artist = artist;
+        this.coverImage = coverImage;
+        this.yearOfRelease = yearOfRelease;
     }
 
-    public Record(Integer id, String name) {
+    public Record(Integer id, String name, String artist, String coverImage, Integer yearOfRelease) {
         this.id = id;
         this.name = name;
+        this.artist = artist;
+        this.coverImage = coverImage;
+        this.yearOfRelease = yearOfRelease;
     }
 
     public Integer getId() {
@@ -31,5 +40,17 @@ public class Record {
 
     public String getName() {
         return name;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public Integer getYearOfRelease() {
+        return yearOfRelease;
     }
 }
