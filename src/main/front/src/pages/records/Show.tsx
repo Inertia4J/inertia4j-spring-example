@@ -29,7 +29,7 @@ export default function Show({ record }: { record: Record }) {
         )}
 
         <h3>{record.name}</h3>
-        <h5>{record.artist} ({record.yearOfRelease})</h5>
+        <h5>{record.artist} {record.yearOfRelease && `(${record.yearOfRelease})`}</h5>
 
         <a
           href="#"
