@@ -11,12 +11,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   spring:
-    image: docker.io/gradle:8.11.1-jdk21
+    image: docker.io/eclipse-temurin:21-jdk
     working_dir: /app
     volumes:
       - gradle_cache:/root/.gradle
       - .:/app
     command: ./gradlew --no-daemon bootRun
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgres:5432/example_db'
     depends_on:
       - postgres
     ports:
