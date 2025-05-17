@@ -31,7 +31,7 @@ public class RecordController {
 
     @GetMapping("/records/new")
     public ResponseEntity<String> newRecord() {
-        return inertia.render("records/New", null);
+        return inertia.render("records/New", Map.of());
     }
 
     @PostMapping("/records")
