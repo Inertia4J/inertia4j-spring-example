@@ -1,5 +1,6 @@
 import { FormEvent } from 'react'
 import { useForm } from '@inertiajs/react'
+import { BackButton } from '../../components/BackButton'
 
 export default function New() {
   const { data, setData, post, processing, errors } = useForm({
@@ -16,7 +17,7 @@ export default function New() {
 
   return (
     <main className="container">
-      <a href="/records">Go back</a>
+      <BackButton href="/records" />
       <br/><br/>
       <h1>Add Record</h1>
       <form onSubmit={handleSubmit}>
