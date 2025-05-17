@@ -18,12 +18,12 @@ const toHeadersObject = (headers) => {
 
 /**
  * Custom dev server to allow fetching the base HTML from the backend server.
- * 
+ *
  * See https://vite.dev/guide/ssr.html#setting-up-the-dev-server for details.
  */
 async function createServer() {
   const app = express()
-  
+
   const vite = await createViteServer({
     server: { middlewareMode: true },
     appType: 'custom'
@@ -31,33 +31,41 @@ async function createServer() {
 
   app.use(vite.middlewares)
   app.use(express.json())
-  app.use('*', async (req, res, next) => {
+  app.use(async (req, res, next) => {
     const url = req.originalUrl
-  
+
     try {
       const extraFetchOptions = req.method === 'GET' || req.method === 'HEAD'
         ? {}
         : { body: JSON.stringify(req.body) }
 
-      const response = await fetch(upstreamUrl + url, { 
+      const response = await fetch(upstreamUrl + url, {
         method: req.method,
         headers: req.headers,
         ...extraFetchOptions
       })
 
-      logger.info(`[${response.status}] ${req.method} ${url} -> ${upstreamUrl}${url}`)
+      logger.info(`[${response.status}] Forwarded ${req.method} ${url} to upstream ${upstreamUrl}${url}`)
 
-      if (response.headers.get('content-type')?.startsWith('text/html')) {
+      const headers = toHeadersObject(response.headers)
+
+      let body
+      if (headers['content-type']?.startsWith('text/html')) {
         const template = await response.text()
-        const html = await vite.transformIndexHtml(url, template)
-    
-        res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+        body = await vite.transformIndexHtml(url, template)
       } else {
-        const headers = toHeadersObject(response.headers)
-
-        res.status(response.status).set(headers).send(await response.text())
+        body = await response.text()
       }
+
+      /*
+       * Vite HTML transformations change the content length, so we need
+       * to override the header sent by the upstream with the new length.
+       */
+      headers['content-length'] = body.length
+
+      res.status(response.status).set(headers).end(body)
     } catch (e) {
+      console.error(e)
       vite.ssrFixStacktrace(e)
       next(e)
     }
