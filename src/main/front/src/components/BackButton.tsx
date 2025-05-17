@@ -1,10 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-interface BackButtonProps {
-  href: string;
-}
-
-export const BackButton = ({ href }: BackButtonProps) => (
+export const BackButton = ({ href }: { href: string }) => (
   <Link
     href={href}
     as="button"
