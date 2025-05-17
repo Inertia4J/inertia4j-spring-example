@@ -53,15 +53,17 @@ async function createServer() {
       if (headers['content-type']?.startsWith('text/html')) {
         const template = await response.text()
         body = await vite.transformIndexHtml(url, template)
-      } else {
+        /*
+         * Vite HTML transformations change the content length, so we need
+         * to override the header sent by the upstream with the new length.
+         */
+        headers['content-length'] = body.length
+      } else if (headers['content-type']?.startsWith('application/json')) {
         body = await response.text()
+      } else {
+        const blob = await response.blob()
+        body = await blob.bytes()
       }
-
-      /*
-       * Vite HTML transformations change the content length, so we need
-       * to override the header sent by the upstream with the new length.
-       */
-      headers['content-length'] = body.length
 
       res.status(response.status).set(headers).end(body)
     } catch (e) {
