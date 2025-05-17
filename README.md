@@ -2,6 +2,8 @@
 
 Example application made using Spring, Inertia and React, with the Inertia4J Spring adapter.
 
+![Demo](https://github.com/Inertia4J/inertia4j-spring-example/blob/assets/Demo.gif)
+
 ## Running
 
 1. Set the database up. By default, the project uses PostgreSQL, so you should edit
