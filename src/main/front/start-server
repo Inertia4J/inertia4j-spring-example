@@ -1,0 +1,5 @@
+#!/bin/sh
+
+npm install --no-save yarn
+npx yarn install
+exec npx yarn start "$@"
