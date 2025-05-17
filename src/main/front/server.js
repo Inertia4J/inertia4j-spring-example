@@ -58,8 +58,6 @@ async function createServer() {
          * to override the header sent by the upstream with the new length.
          */
         headers['content-length'] = body.length
-      } else if (headers['content-type']?.startsWith('application/json')) {
-        body = await response.text()
       } else {
         const blob = await response.blob()
         body = await blob.bytes()
