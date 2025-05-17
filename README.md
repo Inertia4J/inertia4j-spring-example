@@ -14,3 +14,6 @@ Example application made using Spring, Inertia and React, with the Inertia4J Spr
     yarn start
     ```
 4. Access [http://localhost:5173/](http://localhost:5173/).
+
+The server running on port 5173 is a custom Vite development server and should work for other frontend and backend frameworks.
+If necessary, you can tweak it by modifying [server.js](/src/main/front/server.js).
