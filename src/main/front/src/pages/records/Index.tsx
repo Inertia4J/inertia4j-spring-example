@@ -11,7 +11,7 @@ export default function Index({ records }: { records: Record[] }) {
         <article key={record.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
           <div style={{ marginRight: '30px' }}>
             <img
-              src={record.coverImage || '/assets/default-cover.jpg'} // Fallback image in case coverImage is null
+              src={record.coverImage || '/images/default-cover.png'} // Fallback image in case coverImage is null
               alt={`Cover of ${record.name}`}
               className="cover-image"
               style={{ maxWidth: '64px', maxHeight: '64px' }} // Ensures the image doesn't stretch
