@@ -48,7 +48,7 @@ class Inertia4jSpringApplicationTests {
     <title>App</title>
   </head>
   <body>
-    <div id="app" data-page='{"component":"records/Index","props":{"records":[{"id":1,"name":"Deadwing","artist":"Porcupine Tree","coverImage":null,"yearOfRelease":2005},{"id":2,"name":"White Album","artist":"The Beatles","coverImage":null,"yearOfRelease":1968},{"id":3,"name":"Sailing the Seas of Cheese","artist":"Primus","coverImage":null,"yearOfRelease":1991}]},"url":"/","version":"latest","encryptHistory":false,"clearHistory":false}'></div>
+    <div id="app" data-page='{&quot;component&quot;:&quot;records/Index&quot;,&quot;props&quot;:{&quot;records&quot;:[{&quot;id&quot;:1,&quot;name&quot;:&quot;Deadwing&quot;,&quot;artist&quot;:&quot;Porcupine Tree&quot;,&quot;coverImage&quot;:null,&quot;yearOfRelease&quot;:2005},{&quot;id&quot;:2,&quot;name&quot;:&quot;White Album&quot;,&quot;artist&quot;:&quot;The Beatles&quot;,&quot;coverImage&quot;:null,&quot;yearOfRelease&quot;:1968},{&quot;id&quot;:3,&quot;name&quot;:&quot;Sailing the Seas of Cheese&quot;,&quot;artist&quot;:&quot;Primus&quot;,&quot;coverImage&quot;:null,&quot;yearOfRelease&quot;:1991}]},&quot;url&quot;:&quot;/&quot;,&quot;version&quot;:&quot;latest&quot;,&quot;encryptHistory&quot;:false,&quot;clearHistory&quot;:false}'></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
