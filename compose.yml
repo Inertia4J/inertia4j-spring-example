@@ -30,7 +30,7 @@ services:
     volumes:
       - yarn_cache:/usr/local/share/.cache/yarn
       - ./src/main/front:/app
-    command: './start-server -u http://spring:8080'
+    command: [ "sh", "./start-server", "-u", "http://spring:8080" ]
     ports:
       - "5173:5173"
 
